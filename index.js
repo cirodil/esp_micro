@@ -1,8 +1,20 @@
-// install express with `npm install express` 
-const express = require('express')
-const app = express()
+// install express with `npm install express`
+const express = require("express");
+const app = express();
 
-app.get('/', (req, res) => res.send('Hello World!'))
+app.use(express.json());
 
-// export 'app'
-module.exports = app
+app.get("/", (req, res) => res.send("Hello World!"));
+
+app.post("/temp", function (req, res) {
+  if (!req.body) return res.sendStatus(400);
+
+  let temp = req.body;
+  res.json(temp);
+});
+
+app.listen(3000, () => {
+  console.log("Application listening on port 3333!");
+});
+
+module.exports = app;
