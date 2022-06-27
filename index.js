@@ -7,9 +7,14 @@ const db = deta.Base("Temp");
 const app = express();
 app.use(express.json());
 
-app.get("/", (req, res) => res.send("Hello World!"));
+app.get("/", async (req, res) => {
+  // let respBody = {};
+  const { value: items } = await db.fetch([]).next();
+  // respBody = items;
+  res.json(items);
+});
 
-app.post("/temp", async function (req, res) {
+app.post("/temp", async (req, res) => {
   if (!req.body) return res.sendStatus(400);
 
   const { temp } = req.body;
