@@ -7,6 +7,7 @@ const db = deta.Base("Temp");
 const app = express();
 app.use(express.json());
 
+// Запрос списка показаний из базы данных
 app.get("/", async (req, res) => {
   // let respBody = {};
   const { value: items } = await db.fetch([]).next();
@@ -14,6 +15,7 @@ app.get("/", async (req, res) => {
   res.json(items);
 });
 
+// Создание новой записи в базе данных
 app.post("/temp", async (req, res) => {
   if (!req.body) return res.sendStatus(400);
 
